@@ -2,18 +2,23 @@ import flet as ft
 import random
 
 def main(page: ft.Page):
-    # Configurações da página
     page.bgcolor = "#228B22"
     page.title = "Gerador de Números para Loteria"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
-    # Função para gerar números aleatórios
     def gerar_numeros(e):
         for i in range(len(caixas)):
             caixas[i].content.value = str(random.randint(1, 60))
         page.update()
 
-    # Lista de caixas redondas
+    titulo = ft.Text(
+        value="Bem-vindo ao Gerador de Números para Loteria!",
+        color="white",
+        size=24,
+        weight=ft.FontWeight.BOLD,
+        text_align=ft.TextAlign.CENTER
+    )
+
     caixas = [
         ft.Container(
             content=ft.Text(value="0", color="black"),
@@ -23,19 +28,18 @@ def main(page: ft.Page):
             bgcolor="white",
             alignment=ft.alignment.center
         )
-        for _ in range(6)  # Gerar 6 caixas
+        for _ in range(6)  
     ]
 
-    # Botão para gerar números
     botao_gerar = ft.ElevatedButton(
         text="Gerar Números",
         on_click=gerar_numeros,
     )
 
-    # Adicionar elementos à página
     page.add(
         ft.Column(
             [
+                titulo,
                 ft.Row(caixas, alignment=ft.MainAxisAlignment.CENTER),
                 botao_gerar
             ],
